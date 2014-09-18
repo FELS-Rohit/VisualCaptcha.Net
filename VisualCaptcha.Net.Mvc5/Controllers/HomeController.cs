@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.SessionState;
-using Glimpse.AspNet.Tab;
-using visualCaptcha_Nuget;
+using VisualCaptchaNet.Core;
 
-namespace visualCaptcha_DotNet.Controllers
+namespace VisualCaptchaNet.Mvc5.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly VisualCaptcha _visualCaptcha;
+		private readonly VisualCaptchaNet.Core.VisualCaptcha _visualCaptcha;
 
 		public HomeController(): this(new HttpContextSession())
 		{
@@ -23,12 +20,12 @@ namespace visualCaptcha_DotNet.Controllers
 		public HomeController(ISessionProvider sessionProvider)
 		{
 			var mediaPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content");
-			_visualCaptcha = new VisualCaptcha(sessionProvider, mediaPath);
+			_visualCaptcha = new VisualCaptchaNet.Core.VisualCaptcha(sessionProvider, mediaPath);
 		}
 
 		public HomeController(ISessionProvider sessionProvider, string path)
 		{
-			_visualCaptcha = new VisualCaptcha(sessionProvider, path);
+			_visualCaptcha = new VisualCaptchaNet.Core.VisualCaptcha(sessionProvider, path);
 		}
 
 		public ActionResult Index()
@@ -36,7 +33,7 @@ namespace visualCaptcha_DotNet.Controllers
 			return View();
 		}
 
-		public JsonResult Start(int numberOfImages = VisualCaptcha.DefaultNumberOfImages)
+		public JsonResult Start(int numberOfImages = VisualCaptchaNet.Core.VisualCaptcha.DefaultNumberOfImages)
 		{
 			_visualCaptcha.Generate(numberOfImages);
 

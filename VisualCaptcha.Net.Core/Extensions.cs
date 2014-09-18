@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 
-public static class Extensions
+namespace VisualCaptchaNet.Core
 {
-	public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
+	public static class Extensions
 	{
-		return list.OrderBy(x => GenerateRandomKey(5));
-	}
+		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
+		{
+			return list.OrderBy(x => GenerateRandomKey(5));
+		}
 
-	public static string GenerateRandomKey(int bytes)
-	{
-		RandomNumberGenerator rng = new RNGCryptoServiceProvider();
-		byte[] tokenData = new byte[bytes];
-		rng.GetBytes(tokenData);
-		return Convert.ToBase64String(tokenData);
+		public static string GenerateRandomKey(int bytes)
+		{
+			RandomNumberGenerator rng = new RNGCryptoServiceProvider();
+			byte[] tokenData = new byte[bytes];
+			rng.GetBytes(tokenData);
+			return Convert.ToBase64String(tokenData);
+		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace visualCaptcha_Nuget
+namespace VisualCaptchaNet.Core
 {
 	public class VisualCaptchaSession
 	{

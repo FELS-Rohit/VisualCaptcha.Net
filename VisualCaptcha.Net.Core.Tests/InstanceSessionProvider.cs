@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using visualCaptcha_Nuget;
+﻿using System.Collections.Generic;
 
-namespace VisualCaptcha_DotNet.Tests
+namespace VisualCaptchaNet.Core.Tests
 {
 	public class InstanceSessionProvider : ISessionProvider
 	{

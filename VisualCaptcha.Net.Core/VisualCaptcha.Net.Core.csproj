@@ -7,8 +7,8 @@
     <ProjectGuid>{327B56D2-913F-40E5-87CD-CC2C66200863}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>visualCaptcha_Nuget</RootNamespace>
-    <AssemblyName>visualCaptcha-Nuget</AssemblyName>
+    <RootNamespace>VisualCaptchaNet.Core</RootNamespace>
+    <AssemblyName>VisualCaptchaNet.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

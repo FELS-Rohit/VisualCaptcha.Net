@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace visualCaptcha_Nuget
+namespace VisualCaptchaNet.Core
 {
 	public class VisualCaptcha
 	{

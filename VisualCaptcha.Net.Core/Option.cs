@@ -1,4 +1,4 @@
-namespace visualCaptcha_Nuget
+namespace VisualCaptchaNet.Core
 {
 	public class Option
 	{

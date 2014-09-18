@@ -1,8 +1,7 @@
-﻿using System.Security.Policy;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace visualCaptcha_DotNet
+namespace VisualCaptchaNet.Mvc5
 {
 	public class RouteConfig
 	{

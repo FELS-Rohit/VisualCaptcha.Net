@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using visualCaptcha_DotNet.Controllers;
-using visualCaptcha_Nuget;
 
-namespace VisualCaptcha_DotNet.Tests
+namespace VisualCaptchaNet.Core.Tests
 {
 	[TestFixture]
     public class VisualCaptchaTests
@@ -53,9 +51,9 @@ namespace VisualCaptcha_DotNet.Tests
 			
 		}
 
-		private static VisualCaptcha BuildVisualCaptcha(string @namespace = "test")
+		private static VisualCaptchaNet.Core.VisualCaptcha BuildVisualCaptcha(string @namespace = "test")
 		{
-			return new VisualCaptcha
+			return new VisualCaptchaNet.Core.VisualCaptcha
 				(
 					new InstanceSessionProvider(),
 					null,

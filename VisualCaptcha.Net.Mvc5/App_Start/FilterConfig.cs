@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace visualCaptcha_DotNet
+namespace VisualCaptchaNet.Mvc5
 {
 	public class FilterConfig
 	{

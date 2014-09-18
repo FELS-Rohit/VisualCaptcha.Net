@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace visualCaptcha_DotNet
+namespace VisualCaptchaNet.Mvc5
 {
 	public class BundleConfig
 	{

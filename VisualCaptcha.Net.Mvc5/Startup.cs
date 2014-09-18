@@ -1,8 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using VisualCaptchaNet.Mvc5;
 
-[assembly: OwinStartupAttribute(typeof(visualCaptcha_DotNet.Startup))]
-namespace visualCaptcha_DotNet
+[assembly: OwinStartup(typeof(Startup))]
+namespace VisualCaptchaNet.Mvc5
 {
     public partial class Startup
     {

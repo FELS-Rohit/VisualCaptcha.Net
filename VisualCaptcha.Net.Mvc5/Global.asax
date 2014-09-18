@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="visualCaptcha_DotNet.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="VisualCaptchaNet.Mvc5.MvcApplication" Language="C#" %>

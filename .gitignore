@@ -42,4 +42,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+
 *.suo
+packages/
+*/bin/
+*/obj/
+*.user
