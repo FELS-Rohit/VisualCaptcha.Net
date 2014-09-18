@@ -114,7 +114,7 @@ namespace VisualCaptchaNet.Mvc5.Controllers
 					Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 				}
 
-				if (Request.AcceptTypes != null && Request.AcceptTypes.Contains("html"))
+				if (Request.AcceptTypes != null && Request.AcceptTypes.Any(x=>x.Contains("html")))
 					//was req.accepts( 'html' ) !== undefined ) 
 				{
 					Response.Redirect("/?" + queryParams);

@@ -3,12 +3,15 @@
 }
 
 <div class="jumbotron">
-	<h1>VisualCaptcha-DotNet</h1>
+	<h1>VisualCaptcha.Net.Mvc5</h1>
 	<p class="lead">A configurable captcha solution, focusing on accessibility & simplicity whilst maintaining security.</p>
 	<p><a href="http://visualcaptcha.net/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 
-	
-	<div id="captcha"></div>
+	@using(Html.BeginForm("Try","Home"))
+	{
+		<div id="captcha"></div>
+		<button>Submit</button>
+	}
 </div>
 
 <div class="row">

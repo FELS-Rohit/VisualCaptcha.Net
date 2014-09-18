@@ -9,5 +9,5 @@
 	});
 
 	// use next code for getting captcha object
-	var capthca = el.data('captcha');
+	var captcha = el.data('captcha');
 });
