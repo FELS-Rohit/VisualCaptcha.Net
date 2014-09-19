@@ -117,7 +117,8 @@ namespace VisualCaptchaNet.Mvc5.Controllers
 				if (Request.AcceptTypes != null && Request.AcceptTypes.Any(x=>x.Contains("html")))
 					//was req.accepts( 'html' ) !== undefined ) 
 				{
-					Response.Redirect("/?" + queryParams);
+					var querystring = string.Join("&", queryParams.AllKeys.Select(key => string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(queryParams[key]))));
+					Response.Redirect("/?" + querystring);
 				}
 				Response.End();
 			}
