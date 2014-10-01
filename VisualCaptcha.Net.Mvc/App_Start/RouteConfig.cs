@@ -33,11 +33,10 @@ namespace VisualCaptcha.Net.Mvc
 					)
 				);
 
-			routes.MapRoute(
-				name: "Default",
-				url: "{controller}/{action}/{id}",
-				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-				);
+			routes.MapRoute(name: "Audio", url: "Home/Audio", defaults: new { controller = "Home", action = "Audio" });
+			routes.MapRoute(name: "Try", url: "Home/Try", defaults: new { controller = "Home", action = "Try" });
+
+			routes.MapRoute(name: "Default", url: "", defaults: new { controller = "Home", action = "Index" });
 		}
 	}
 }
