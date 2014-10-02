@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Net;
 using Newtonsoft.Json;
 
 namespace VisualCaptchaNet.Core
@@ -168,6 +170,28 @@ namespace VisualCaptchaNet.Core
 				return "audio/ogg";
 			}
 			return "audio/mpeg";
+		}
+
+		public CaptchaState ValidateAnswer(NameValueCollection form)
+		{
+			var frontendData = Session.FrontendData;
+			if (frontendData==null) return CaptchaState.NoCaptcha;
+
+			var imageAnswer = form[frontendData.imageFieldName];
+			var audioAnswer = form[frontendData.audioFieldName];
+
+			if (imageAnswer != null)
+				return ValidateImage(imageAnswer) 
+					? CaptchaState.ValidImage 
+					: CaptchaState.FailedImage;
+						
+			if (audioAnswer != null)
+				// We set lowercase to allow case-insensitivity, but it's actually optional
+				return ValidateAudio(audioAnswer.ToLower()) 
+					? CaptchaState.ValidAudio 
+					: CaptchaState.FailedAudio;
+		
+			return CaptchaState.GeneralFail;
 		}
 	}
 }

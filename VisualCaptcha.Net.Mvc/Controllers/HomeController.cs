@@ -59,69 +59,48 @@ namespace VisualCaptchaNet.Mvc.Controllers
 		[HttpPost]
 		public void Try()
 		{
+			var result = _visualCaptcha.ValidateAnswer(Request.Form);
+
 			var queryParams = new NameValueCollection();
-			var frontendData = _visualCaptcha.Session.FrontendData;
 
-			// Add namespace to query params, if present
-			if (string.IsNullOrEmpty(Request.Form["namespace"]) == false)
+			switch (result)
 			{
-				queryParams.Add("namespace", Request.Form["namespace"]);
-			}
-
-			//// It's not impossible this method is called before visualCaptcha is initialized, so we have to send a 404
-			if (frontendData == null)
-			{
-				queryParams.Add("status", "noCaptcha");
-				Response.StatusCode = (int) HttpStatusCode.NotFound;
-				Response.StatusDescription = "Not Found";
-			}
-			else
-			{
-				var imageAnswer = Request.Form[frontendData.imageFieldName];
-				var audioAnswer = Request.Form[frontendData.audioFieldName];
-				// If an image field name was submitted, try to validate it
-
-				if (imageAnswer != null)
-				{
-					if (_visualCaptcha.ValidateImage(imageAnswer))
-					{
-						queryParams.Add("status", "validImage");
-						Response.StatusCode = (int) HttpStatusCode.OK;
-					}
-					else
-					{
-						queryParams.Add("status", "failedImage");
-						Response.StatusCode = (int) HttpStatusCode.Forbidden;
-					}
-				}
-				else if (audioAnswer != null)
-				{
-					// We set lowercase to allow case-insensitivity, but it's actually optional
-					if (_visualCaptcha.ValidateAudio(audioAnswer.ToLower()))
-					{
-						queryParams.Add("status", "validAudio");
-						Response.StatusCode = (int) HttpStatusCode.OK;
-					}
-					else
-					{
-						queryParams.Add("status", "failedAudio");
-						Response.StatusCode = (int) HttpStatusCode.Forbidden;
-					}
-				}
-				else
-				{
+				case CaptchaState.GeneralFail:
+					queryParams.Add("status", "noCaptcha");
+					Response.StatusCode = (int)HttpStatusCode.NotFound;
+					Response.StatusDescription = "Not Found";
+					break;
+				case CaptchaState.ValidImage:
+					queryParams.Add("status", "validImage");
+					Response.StatusCode = (int)HttpStatusCode.OK;
+					break;
+				case CaptchaState.FailedImage:
+					queryParams.Add("status", "failedImage");
+					Response.StatusCode = (int)HttpStatusCode.Forbidden;
+					break;
+				case CaptchaState.ValidAudio:
+					queryParams.Add("status", "validAudio");
+					Response.StatusCode = (int)HttpStatusCode.OK;
+					break;
+				case CaptchaState.FailedAudio:
+					queryParams.Add("status", "failedAudio");
+					Response.StatusCode = (int)HttpStatusCode.Forbidden;
+					break;
+				default:
 					queryParams.Add("status", "failedPost");
-					Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-				}
-
-				if (Request.AcceptTypes != null && Request.AcceptTypes.Any(x=>x.Contains("html")))
-					//was req.accepts( 'html' ) !== undefined ) 
-				{
-					var querystring = string.Join("&", queryParams.AllKeys.Select(key => string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(queryParams[key]))));
-					Response.Redirect("/?" + querystring);
-				}
-				Response.End();
+					Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+					break;
 			}
+
+			if (Request.AcceptTypes != null && Request.AcceptTypes.Any(x => x.Contains("html")))
+			//was req.accepts( 'html' ) !== undefined ) 
+			{
+				var querystring = string.Join("&", queryParams.AllKeys.Select(key => string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(queryParams[key]))));
+				Response.Redirect("/?" + querystring);
+			}
+
+			Response.End();
+			
 		}
 	}
 
